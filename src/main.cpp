@@ -1,4 +1,8 @@
 #include "main.hpp"
+#include "GlobalNamespace/MainMenuViewController.hpp"
+#include "UnityEngine/UI/Button.hpp"
+#include "GlobalNamespace/MusicPackPromoBanner.hpp"
+#include "UnityEngine/GameObject.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -13,6 +17,16 @@ Configuration& getConfig() {
 Logger& getLogger() {
     static Logger* logger = new Logger(modInfo);
     return *logger;
+}
+
+MAKE_HOOK_MATCH(Adblock, &GlobalNamespace::MainMenuViewController::DidActivate, void, GlobalNamespace::MainMenuViewController *self, bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
+
+    Adblock(self, firstActivation, addedToHierarchy, screenSystemEnabling); 
+    
+    GlobalNamespace::MusicPackPromoBanner *AdButton = self->musicPackPromoBanner;
+    UnityEngine::GameObject *gameObject = AdButton->get_gameObject();
+    
+    gameObject->SetActive(false);
 }
 
 // Called at the early stages of game loading
@@ -30,6 +44,6 @@ extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
-    // Install our hooks (none defined yet)
+    INSTALL_HOOK(getLogger(), Adblock);
     getLogger().info("Installed all hooks!");
 }
