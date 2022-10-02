@@ -2,12 +2,12 @@
 	"sharedDir": "shared",
 	"dependenciesDir": "extern",
 	"info": {
-		"name": "NAME",
-		"id": "ID",
+		"name": "Adblock",
+		"id": "adblock",
 		"version": "0.1.0",
 		"url": null,
 		"additionalData": {
-			"overrideSoName": "libID.so"
+			"overrideSoName": "libAdblock.so"
 		}
 	},
 	"dependencies": [
@@ -26,7 +26,31 @@
 			"additionalData": {
 				
 			}
-		}
+		},
+		{
+			"id": "codegen",
+			"versionRange": "0.25.0",
+			"additionalData": {
+				
+			}
+		},
+		{
+			"id": "questui",
+			"versionRange": "^0.16.4",
+			"additionalData": {
+				
+			}
+		},
+    		{
+      			"id": "config-utils",
+      			"versionRange": "^0.8.0",
+      			"additionalData": {}
+    		},
+    		{
+      			"id": "custom-types",
+      			"versionRange": "^0.15.18",
+      			"additionalData": {}
+    		}
 	],
 	"additionalData": {
 		
